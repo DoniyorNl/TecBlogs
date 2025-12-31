@@ -81,6 +81,6 @@ export const analytics = {
 // Extend Window interface for TypeScript
 declare global {
 	interface Window {
-		gtag: (command: string, targetId: string, config?: Record<string, any>) => void
+		gtag: (command: string, targetId: string, config?: Record<string, unknown>) => void
 	}
 }

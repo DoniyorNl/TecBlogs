@@ -16,7 +16,8 @@ export default function Footer() {
 					<div className='md:col-span-2'>
 						<Logo />
 						<p className='mt-4 text-sm text-muted-foreground max-w-md'>
-							O'zbek tilida dasturlash bo'yicha zamonaviy blog platformasi. Texnologiya, dasturlash va IT sohasidagi eng so'nggi yangiliklar.
+							O&apos;zbek tilida dasturlash bo&apos;yicha zamonaviy blog platformasi. Texnologiya, dasturlash va IT sohasidagi eng so&apos;nggi
+							yangiliklar.
 						</p>
 						{/* Social Links */}
 						<div className='flex items-center gap-4 mt-6'>
