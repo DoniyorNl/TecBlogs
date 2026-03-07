@@ -1,10 +1,11 @@
+import { SITE_URL } from '@/constants/site'
 import { getAuthors } from '@/service/auth.service'
 import { getBlogs } from '@/service/blog.service'
 import { getTags } from '@/service/tag.service'
 import { MetadataRoute } from 'next'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-	const baseUrl = 'https://sam-b2x-jma3.vercel.app'
+	const baseUrl = SITE_URL
 
 	// Get all blogs
 	const blogs = await getBlogs()

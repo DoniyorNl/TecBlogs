@@ -1,12 +1,9 @@
 import { IArchivedBlog, IBlog } from '@/types'
 import { gql, request } from 'graphql-request'
 
-const endpoint = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!
-
-if (!process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT) {
-	console.error('GraphCMS endpoint is not defined!')
+function getEndpoint(): string | null {
+	return process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT ?? null
 }
-// const token = process.env.DEFAULT_PUBLIC_GRAPHCMS_TOKEN!
 
 export const getBlogs = async () => {
 	const query = gql`
@@ -43,10 +40,13 @@ export const getBlogs = async () => {
 		}
 	`
 	try {
+		const endpoint = getEndpoint()
+		if (!endpoint) return []
 		const { blogs } = await request<{ blogs: IBlog[] }>(endpoint, query)
 		return blogs
 	} catch (error) {
-		console.error('Error fetching data:', error)
+		if (process.env.NODE_ENV === 'development') console.error('Error fetching blogs:', error)
+		return []
 	}
 }
 
@@ -62,7 +62,7 @@ export const getBlogs = async () => {
 // 		blogs: Blog[]
 // 	}
 // }
-export const getArchiveBlogs = async () => {
+export const getArchiveBlogs = async (): Promise<IArchivedBlog[]> => {
 	const query = gql`
 		query MyQuery {
 			blogs(where: { archive: true }) {
@@ -72,20 +72,43 @@ export const getArchiveBlogs = async () => {
 			}
 		}
 	`
+	try {
+		const endpoint = getEndpoint()
+		if (!endpoint) return []
+		const { blogs } = await request<{ blogs: IBlog[] }>(endpoint, query)
+		const filteredBlogs = blogs.reduce((acc: { [year: string]: IArchivedBlog }, blog: IBlog) => {
+			const year = blog.createdAt.substring(0, 4)
+			if (!acc[year]) {
+				acc[year] = { year, blogs: [] }
+			}
+			acc[year].blogs.push(blog)
+			return acc
+		}, {})
+		return Object.values(filteredBlogs)
+	} catch (error) {
+		if (process.env.NODE_ENV === 'development') console.error('Error fetching archive:', error)
+		return []
+	}
+}
 
-	const { blogs } = await request<{ blogs: IBlog[] }>(endpoint, query)
-	console.log(blogs)
-
-	const filteredBlogs = blogs.reduce((acc: { [year: string]: IArchivedBlog }, blog: IBlog) => {
-		const year = blog.createdAt.substring(0, 4)
-		if (!acc[year]) {
-			acc[year] = { year, blogs: [] }
+/** All blog slugs for static generation (generateStaticParams, sitemap). */
+export const getAllSlugs = async (): Promise<string[]> => {
+	const query = gql`
+		query AllBlogSlugs {
+			blogs(where: { archive: false }) {
+				slug
+			}
 		}
-		acc[year].blogs.push(blog)
-		return acc
-	}, {})
-	const results: IArchivedBlog[] = Object.values(filteredBlogs)
-	return results
+	`
+	try {
+		const endpoint = getEndpoint()
+		if (!endpoint) return []
+		const { blogs } = await request<{ blogs: { slug: string }[] }>(endpoint, query)
+		return blogs?.map(b => b.slug) ?? []
+	} catch (error) {
+		if (process.env.NODE_ENV === 'development') console.error('Error fetching blog slugs:', error)
+		return []
+	}
 }
 
 export const getBlogBySlug = async (slug: string) => {
@@ -120,10 +143,13 @@ export const getBlogBySlug = async (slug: string) => {
 		}
 	`
 	try {
+		const endpoint = getEndpoint()
+		if (!endpoint) return null
 		const { blog } = await request<{ blog: IBlog }>(endpoint, query, { slug })
 		return blog
 	} catch (error) {
-		console.error('Error fetching data:', error)
+		if (process.env.NODE_ENV === 'development') console.error('Error fetching blog:', error)
+		return null
 	}
 }
 
@@ -141,9 +167,12 @@ export const getSearchedBlog = async (title: string) => {
 		}
 	`
 	try {
+		const endpoint = getEndpoint()
+		if (!endpoint) return []
 		const { blogs } = await request<{ blogs: IBlog[] }>(endpoint, query, { title })
 		return blogs || []
 	} catch (error) {
-		console.error('Error fetching data:', error)
+		if (process.env.NODE_ENV === 'development') console.error('Error fetching search:', error)
+		return []
 	}
 }

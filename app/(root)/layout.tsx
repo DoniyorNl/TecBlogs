@@ -5,11 +5,13 @@ import Navbar from './_components/navbar'
 
 export default function Layout({ children }: ChildProps) {
 	return (
-		<main>
+		<>
 			<Navbar />
-			<div className='container'>{children}</div>
+			<main id='main-content' className='container' tabIndex={-1}>
+				{children}
+			</main>
 			<Toaster />
 			<Footer />
-		</main>
+		</>
 	)
 }

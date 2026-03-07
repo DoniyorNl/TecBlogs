@@ -22,11 +22,11 @@ export default function Footer() {
 						{/* Social Links */}
 						<div className='flex items-center gap-4 mt-6'>
 							<Link
-								href='https://github.com'
+								href='https://github.com/DoniyorNl'
 								target='_blank'
 								rel='noopener noreferrer'
 								className='p-2 rounded-lg hover:bg-blue-400/20 transition-colors'
-								aria-label='GitHub'
+								aria-label='GitHub - DoniyorNl'
 							>
 								<Github className='w-5 h-5' />
 							</Link>

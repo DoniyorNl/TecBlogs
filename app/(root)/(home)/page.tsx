@@ -8,7 +8,6 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
 	const blogs = await getBlogs()
-	console.log(blogs)
 
 	return (
 		<div className='pt-[10vh] max-w-6xl mx-auto mb-7 min-h-[100vh] px-4 sm:px-6 lg:px-8'>
@@ -25,7 +24,7 @@ export default async function HomePage() {
 			{/* Blog Cards */}
 			<div className='flex flex-col space-y-16 sm:space-y-20 md:space-y-24'>
 				{blogs?.map(blog => (
-					<BlogCard key={blog.title} {...blog} />
+					<BlogCard key={blog.slug} {...blog} />
 				))}
 			</div>
 		</div>

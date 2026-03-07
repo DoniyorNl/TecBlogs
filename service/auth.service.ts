@@ -1,7 +1,9 @@
 import { IAuthor } from '@/types'
 import { gql, request } from 'graphql-request'
 
-const endpoint = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!
+function getEndpoint(): string | null {
+	return process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT ?? null
+}
 
 export const getAuthors = async () => {
 	const query = gql`
@@ -20,10 +22,12 @@ export const getAuthors = async () => {
 		}
 	`
 	try {
+		const endpoint = getEndpoint()
+		if (!endpoint) return []
 		const { authors } = await request<{ authors: IAuthor[] }>(endpoint, query)
 		return authors
 	} catch (error) {
-		console.error('Error fetching authors:', error)
+		if (process.env.NODE_ENV === 'development') console.error('Error fetching authors:', error)
 		return []
 	}
 }
@@ -73,10 +77,12 @@ export const getDetailedAuthor = async (id: string) => {
 	`
 
 	try {
+		const endpoint = getEndpoint()
+		if (!endpoint) return null
 		const { author } = await request<{ author: IAuthor }>(endpoint, query, { id })
 		return author
 	} catch (error) {
-		console.error('Error fetching author details:', error)
+		if (process.env.NODE_ENV === 'development') console.error('Error fetching author details:', error)
 		return null
 	}
 }

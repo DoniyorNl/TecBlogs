@@ -2,10 +2,6 @@
 
 > O'zbek tilida dasturlash bo'yicha zamonaviy blog va maqolalar platformasi
 
-[![Next.js](https://img.shields.io/badge/Next.js-15.0.3-black?style=flat&logo=next.js)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19.0-blue?style=flat&logo=react)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
 
 ## 🌟 Loyiha Haqida
 
@@ -25,11 +21,7 @@
 
 ## 🚀 Demo
 
-🔗 [Live Demo](https://sam-b2x-jma3.vercel.app/)
-
-## 📸 Screenshot
-
-> Screenshot qo'shish: `public/` papkasiga `screenshot.png` qo'shing
+🔗 [Live Demo](https://tec-blogs-red.vercel.app/)
 
 ## 🛠️ Texnologiyalar
 
@@ -74,7 +66,7 @@
 ### 1. Repository'ni Clone qiling
 
 ```bash
-git clone https://github.com/yourusername/TecBlogs.git
+git clone https://github.com/DoniyorNl/TecBlogs.git
 cd TecBlogs
 ```
 
@@ -148,7 +140,8 @@ TecBlogs/
 ├── types/                     # TypeScript types
 │   └── index.ts              # Type definitions
 ├── constants/                 # Constants
-│   └── const.ts              # App constants
+│   ├── const.ts              # Nav, categories, tags
+│   └── site.ts               # SITE_URL, SITE_NAME (single source of truth)
 └── public/                    # Static files
 ```
 
@@ -253,10 +246,10 @@ MIT License - batafsil [LICENSE](LICENSE) faylida
 
 **Doniyor Nasriddinov**
 
-- Website: [sam-b2x-jma3.vercel.app](https://sam-b2x-jma3.vercel.app/)
-- GitHub: [@yourusername](https://github.com/yourusername)
+- Website: [tec-blogs-red.vercel.app](https://tec-blogs-red.vercel.app/)
+- GitHub: [@DoniyorNl](https://github.com/DoniyorNl)
 
-## 🙏 Minnatdorchilik
+
 
 - [Next.js](https://nextjs.org/) - Framework
 - [Vercel](https://vercel.com/) - Hosting
@@ -266,7 +259,7 @@ MIT License - batafsil [LICENSE](LICENSE) faylida
 
 ## 📞 Aloqa
 
-Savollar yoki takliflar uchun [issue](https://github.com/yourusername/TecBlogs/issues) oching.
+Savollar yoki takliflar uchun [issue](https://github.com/DoniyorNl/TecBlogs/issues) oching.
 
 ---
 

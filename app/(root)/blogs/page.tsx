@@ -5,9 +5,11 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-	title: 'All blogs',
+	title: 'Bloglar',
+	description: 'Dasturlash va texnologiya bo‘yicha barcha maqolalar.',
 }
-export default async function getStaticProps() {
+
+export default async function BlogsPage() {
 	const blogs = await getBlogs()
 
 	return (
@@ -17,20 +19,20 @@ export default async function getStaticProps() {
 					<span className='font-jetB'>Blogs</span>
 				</h2>
 
-				<div className='flex gap-1 items-center mt-4'>
-					<Home className='w-4 h-4' />
-					<Link href={'/'} className='opacity-90 hover:underline hover:opacity-100 font-jetB'>
+				<nav className='flex gap-1 items-center mt-4' aria-label='Breadcrumb'>
+					<Home className='w-4 h-4' aria-hidden />
+					<Link href='/' className='opacity-90 hover:underline hover:opacity-100 font-jetB'>
 						Home
 					</Link>
-					<Dot />
-					<p className='font-jetB'>Blogs</p>
-				</div>
+					<Dot aria-hidden />
+					<span className='font-jetB'>Blogs</span>
+				</nav>
 			</div>
 			<h1 className='text-center text-2xl font-jetB mt-7'>Exploring the World of Software</h1>
 
 			<div className='grid grid-cols-3 max-md:grid-cols-1 gap-x-4 gap-y-24 mt-6'>
-				{blogs!.map(blog => (
-					<BlogCard key={blog.title} {...blog} isVertical />
+				{blogs?.map(blog => (
+					<BlogCard key={blog.slug} {...blog} isVertical />
 				))}
 			</div>
 		</div>
