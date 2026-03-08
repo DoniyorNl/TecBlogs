@@ -1,3 +1,4 @@
+import ScrollToTop from '@/components/scroll-to-top'
 import { ChildProps } from '@/types'
 import { Toaster } from 'sonner'
 import Footer from './_components/footer'
@@ -12,6 +13,7 @@ export default function Layout({ children }: ChildProps) {
 			</main>
 			<Toaster />
 			<Footer />
+			<ScrollToTop />
 		</>
 	)
 }

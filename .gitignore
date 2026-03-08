@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.*
+.pnpm-store
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
@@ -23,6 +24,12 @@
 # misc
 .DS_Store
 *.pem
+
+# editor / IDE (use workspace settings locally, do not commit)
+.vscode/
+
+# lockfile: project uses pnpm; ignore npm lock to avoid drift
+package-lock.json
 
 # debug
 npm-debug.log*

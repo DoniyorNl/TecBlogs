@@ -1,5 +1,4 @@
 import ReadingProgress from '@/components/reading-progress'
-import ScrollToTop from '@/components/scroll-to-top'
 import ShareButtons from '@/components/share-buttons'
 import { SITE_URL } from '@/constants/site'
 import { getReadingTime } from '@/lib/utils'
@@ -118,7 +117,6 @@ export default async function BlogSlugPage(props: { params: Params }) {
 					</div>
 				</footer>
 			</article>
-			<ScrollToTop />
 		</>
 	)
 }

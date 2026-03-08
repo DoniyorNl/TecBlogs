@@ -198,18 +198,26 @@ type Tag {
 ## 📝 Available Scripts
 
 ```bash
+# Dependencies
+pnpm install
+
 # Development server
 pnpm dev
 
 # Production build
 pnpm build
 
-# Start production server
+# Start production server (after build)
 pnpm start
 
 # Linting
 pnpm lint
+
+# TypeScript check (no emit)
+pnpm run typecheck
 ```
+
+**To‘liq tekshirish (deploy/PR oldidan):** `pnpm run typecheck` → `pnpm run lint` → `pnpm run build`. Batafsil: [VERIFY.md](VERIFY.md).
 
 ## 🚀 Deploy
 
